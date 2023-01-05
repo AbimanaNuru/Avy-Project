@@ -1710,15 +1710,7 @@ section {
   padding: 10px 12px;
 }
 
-.contact .php-email-form button[type=submit] {
-  border: 0;
-  padding: 10px 32px;
-  color: #0880e8;
-  transition: 0.4s;
-  border-radius: 50px;
-  border: 2px solid #0880e8;
-  background: #fff;
-}
+
 
 .contact .php-email-form button[type=submit]:hover {
   background: #0880e8;

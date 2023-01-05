@@ -1,3 +1,86 @@
+<?php
+include_once('db.php');
+
+  if(isset($_POST['save_contact']))
+{
+// Posted Values    
+$a=mysqli_real_escape_string($connection,$_POST['fname']);
+$b=mysqli_real_escape_string($connection,$_POST['email']);
+$c=mysqli_real_escape_string($connection,$_POST['subject']);
+$d=mysqli_real_escape_string($connection,$_POST['message']);
+
+
+// Query for insertion data into database  
+$query=mysqli_query($connection,"insert into contact_us
+(contact_us_fullname,contact_us_email,contact_us_subject,contact_us_full_message,contact_us_date)
+values('$a','$b','$c','$d',NOW())");
+if($query)
+{
+
+
+
+  echo "<script> 
+  alert('Thank You For Conatct Us');
+  </script>    ";   
+  header("Refresh: 1; url= index.php");
+  
+
+}
+else
+{
+
+  echo "<script> 
+  alert('Fail');
+  </script>    ";   
+  header("Refresh: 1; url= index.php");
+
+}
+
+
+
+}
+
+
+if(isset($_POST['subscribe_save']))
+{
+// Posted Values    
+$a=mysqli_real_escape_string($connection,$_POST['email']);
+
+
+// Query for insertion data into database  
+$query=mysqli_query($connection,"insert into news_lettter
+(news_lettter_email,news_lettter_date)
+values('$a',NOW())");
+if($query)
+{
+
+
+
+  echo "<script> 
+  alert('Thank You ');
+  </script>    ";   
+  header("Refresh: 1; url= index.php");
+  
+
+}
+else
+{
+
+  echo "<script> 
+  alert('Fail');
+  </script>    ";   
+  header("Refresh: 1; url= index.php");
+
+}
+
+
+
+}
+  
+  ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,12 +114,17 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet" />
 
-  <!-- =======================================================
-  * Template Name: Anyar - v4.9.1
-  * Template URL: https://bootstrapmade.com/anyar-free-multipurpose-one-page-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+<style>
+  .send_button{
+  border: 0;
+  padding: 10px 32px;
+  color: #0880e8;
+  transition: 0.4s;
+  border-radius: 50px;
+  border: 2px solid #0880e8;
+  background: #fff;
+}
+</style>
 </head>
 
 <body>
@@ -586,7 +674,7 @@
           </div>
 
           <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="100">
-            <form action="" method="post" role="form" class="php-email-form">
+            <form action="" method="post" role="form">
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="fname" class="form-control" id="name" placeholder="Your Name" required />
@@ -601,9 +689,9 @@
               <div class="form-group mt-3">
                 <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
               </div>
-             
+             <br>
               <div class="text-center">
-                <button type="submit" name="save_contact">Send Message</button>
+                <button class="send_button" type="submit" name="save_contact">Send Message</button>
               </div>
             </form>
           </div>
@@ -627,7 +715,8 @@
           </div>
           <div class="col-lg-6">
             <form action="" method="post">
-              <input type="email" name="email" /><input type="submit" value="Subscribe" />
+              <input type="email" name="email" />
+              <input type="submit" name="subscribe_save" value="Subscribe" />
             </form>
           </div>
         </div>
